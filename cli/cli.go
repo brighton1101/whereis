@@ -5,20 +5,19 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/brighton1101/whereis/core"
 )
 
 const (
-	browserArg  = "b"
-	browserMsg  = "Prompts user to open link in browser if they choose"
-	clipArg     = "c"
-	clipMsg     = "Copies the full link to the clipboard"
-	httpPref    = "http://"
-	httpsPref   = "https://"
-	noRedirMsg  = "No redirect present!"
-	WarnAddPref = "Warning: adding https prefix to uri b/c protocol not specified\n"
+	browserArg   = "b"
+	browserMsg   = "Prompts user to open link in browser if they choose"
+	clipArg      = "c"
+	clipMsg      = "Copies the full link to the clipboard"
+	httpPref     = "http://"
+	httpsPref    = "https://"
+	noRedirMsg   = "No redirect present!"
+	WarnModified = "Warning: original url modified from %s to %s\n\n"
 )
 
 var (
@@ -31,13 +30,12 @@ type ParsedArgs struct {
 	Uri     string
 }
 
-func mightFormatUri(uri string) string {
-	if !strings.HasPrefix(uri, httpPref) ||
-		!strings.HasPrefix(uri, httpsPref) {
-		fmt.Println(WarnAddPref)
-		return httpsPref + uri
+func formatUri(uri string) string {
+	formatted := core.FormatUri(uri)
+	if formatted.IsModified() {
+		fmt.Printf(WarnModified, formatted.Original, formatted.Modified)
 	}
-	return uri
+	return formatted.Modified
 }
 
 func parseArgs() (*ParsedArgs, error) {
@@ -52,7 +50,7 @@ func parseArgs() (*ParsedArgs, error) {
 	return &ParsedArgs{
 		Browser: *obptr,
 		Copy:    *cptr,
-		Uri:     mightFormatUri(tailArgs[0]),
+		Uri:     formatUri(tailArgs[0]),
 	}, nil
 }
 
