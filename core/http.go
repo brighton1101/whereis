@@ -12,6 +12,8 @@ type RedirRes struct {
 	StatusCode    int
 }
 
+const RedirectLinkHeader = "Location"
+
 func checkRedirectBlock(req *http.Request, via []*http.Request) error {
 	return http.ErrUseLastResponse
 }
@@ -36,7 +38,7 @@ func GetNoRedirect(uri string) (*RedirRes, error) {
 	if err != nil {
 		return nil, err
 	}
-	redirectedUri := res.Header.Get("Location")
+	redirectedUri := res.Header.Get(RedirectLinkHeader)
 	return &RedirRes{
 		BaseUri:       uri,
 		RedirectedUri: redirectedUri,

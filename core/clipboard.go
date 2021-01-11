@@ -25,6 +25,7 @@ const (
 	LinuxR    = "linux"
 	MacR      = "darwin"
 	WindowsR  = "windows"
+	PowerExe  = "powershell.exe"
 	Pbcopy    = "pbcopy"
 	Pscopy    = "clip"
 	XclipName = "xclip"
@@ -97,7 +98,7 @@ func (c *Shell) Copy(text string) error {
 
 // Copies using powershell command on a windows machine
 func (c *Powershell) Copy(text string) error {
-	ps, _ := exec.LookPath("powershell.exe")
+	ps, _ := exec.LookPath(PowerExe)
 	cmd := fmt.Sprintf("echo \"%s\" | %s", text, c.cmd)
 	return exec.Command(ps, cmd).Run()
 }
