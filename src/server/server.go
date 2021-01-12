@@ -13,7 +13,7 @@ import (
 const (
 	WhereisPath = "/"
 	TargetUriQueryParam = "uri"
-	Port = ":8080"
+	Port = ":5000"
 )
 
 func HandleWhereis(w http.ResponseWriter, r *http.Request) {

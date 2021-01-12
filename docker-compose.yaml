@@ -1,0 +1,19 @@
+version: "3.4"
+services:
+  nginx:
+    build:
+      dockerfile: "./docker/nginx/Dockerfile"
+      context: "."
+      args:
+        NGINX_CONF_LOCALPATH: "./nginx/nginx.conf"
+        ROOT_WEBPAGE_LOCALPATH: "./static/index.html"
+    ports:
+    - "8080:80"
+  whereis:
+    build:
+      dockerfile: "./docker/go/Dockerfile"
+      context: "."
+      args:
+        GO_SRC: "./src/"
+    ports:
+      - "5000:5000"
