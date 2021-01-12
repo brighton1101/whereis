@@ -5,7 +5,7 @@ services:
       dockerfile: "./docker/nginx/Dockerfile"
       context: "."
       args:
-        NGINX_CONF_LOCALPATH: "./nginx/nginx.conf"
+        NGINX_CONF_LOCALPATH: "./docker/nginx/nginx.conf"
         ROOT_WEBPAGE_LOCALPATH: "./static/index.html"
     ports:
     - "8080:80"
@@ -14,6 +14,6 @@ services:
       dockerfile: "./docker/go/Dockerfile"
       context: "."
       args:
-        GO_SRC: "./src/"
+        GO_SRC: "."
     ports:
       - "5000:5000"

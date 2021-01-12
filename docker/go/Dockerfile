@@ -5,4 +5,4 @@ ARG GO_SRC
 WORKDIR /go/src/app
 COPY ${GO_SRC} .
 
-ENTRYPOINT go run serverentry.go
+ENTRYPOINT go run server.go
