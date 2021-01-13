@@ -5,6 +5,33 @@
   <title>Where Is?</title>
 </head>
 <body>
-  <h2>Hello from Nginx container</h2>
+  <style type="text/css">
+    #content {
+      padding-left: 25%;
+      padding-right: 25%;
+      margin: auto;
+      text-align: center;
+    }
+  </style>
+  <div id="content">
+    <div id="header">
+      <h1>Where Is?</h1>
+      <h3>Check to see where those links are taking you</h3> 
+    </div> 
+    <div id="body">
+      <form action="" id="userForm">
+        <input type="text" id="userInput">
+        <button type="submit">Where is...</button>
+        <button id="clearButton" type="button">Clear</button>
+      </form>
+      <div id="results"> 
+      </div>
+    </div>
+    <div id="footer">
+      <p>Check out <a href="https://github.com/brighton1101/whereis">Github</a> for source, and for a CLI that does the same thing.</p>
+      <p>&copy; Brighton Balfrey 2021</p>
+    </div>
+  </div>
+  <script src="/index.js"></script>
 </body>
 </html>

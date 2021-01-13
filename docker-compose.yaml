@@ -6,7 +6,7 @@ services:
       context: "."
       args:
         NGINX_CONF_LOCALPATH: "./docker/nginx/nginx.conf"
-        ROOT_WEBPAGE_LOCALPATH: "./static/index.html"
+        ROOT_STATIC_LOCALPATH: "./static/*"
     ports:
     - "8080:80"
   whereis:
