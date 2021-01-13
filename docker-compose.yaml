@@ -7,8 +7,9 @@ services:
       args:
         NGINX_CONF_LOCALPATH: "./docker/nginx/nginx.conf"
         ROOT_STATIC_LOCALPATH: "./static/*"
+    restart: always
     ports:
-    - "8080:80"
+    - "80:80"
   whereis:
     build:
       dockerfile: "./docker/go/Dockerfile"
@@ -16,4 +17,5 @@ services:
       args:
         GO_SRC: "."
     ports:
-      - "5000:5000"
+    - "5000:5000"
+    restart: always
