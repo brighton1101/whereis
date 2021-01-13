@@ -2,6 +2,8 @@ const WHEREIS_URI = "/api"
 const RES_DOM_NODE = document.querySelector("#results");
 const ERR_TEXT = "Error getting results from server..."
 const WARN_TEXT = "Only http/https protocols supported. Prepedning https:// to url..."
+const RES_LINK_CLASS = "res-link";
+const USER_INPUT_SELECTOR = "#userInput";
 
 function whereIsUri(userInput) {
   if (!(userInput.includes("http://") || 
@@ -27,12 +29,17 @@ function fetchWhereIs(userInput) {
 
 function displayResults(whereIsRes) {
   const resDomNode = RES_DOM_NODE;
-  const origUriNode = document.createElement("h3");
-  const redirUriNode = document.createElement("h3");
-  origUriNode.textContent = `Original: ${whereIsRes.BaseUri}`;
-  redirUriNode.textContent = `Redirected to: ${whereIsRes.RedirectedUri}`
-  resDomNode.append(origUriNode);
-  resDomNode.append(redirUriNode);
+  const origUriNode = document.createElement("a");
+  const redirUriNode = document.createElement("a");
+  origUriNode.innerText = `Original: ${whereIsRes.BaseUri}`;
+  origUriNode.href = whereIsRes.BaseUri;
+  origUriNode.className = RES_LINK_CLASS;
+  redirUriNode.innerText = `Redirected to ${whereIsRes.RedirectedUri}`;
+  redirUriNode.href = whereIsRes.RedirectedUri;
+  redirUriNode.className = RES_LINK_CLASS;
+  resDomNode.appendChild(origUriNode);
+  resDomNode.appendChild(document.createElement("br"));
+  resDomNode.appendChild(redirUriNode);
 }
 
 function displayError() {
@@ -52,7 +59,7 @@ function clearResultsDiv() {
 function handleSubmit(event) {
   event.preventDefault();
   clearResultsDiv();
-  const userInput = document.querySelector("#userInput").value;
+  const userInput = document.querySelector(USER_INPUT_SELECTOR).value;
   fetchWhereIs(userInput)
     .then(res => displayResults(res))
     .catch(err => displayError());
