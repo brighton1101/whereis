@@ -17,3 +17,8 @@ Should open in browser (y/n): n
     - `-c` Will copy resulting link to clipboard (NOTE: only tested on MacOS as of now)
 - Positional arg is shortened link
 - Example `(executable) -b -c [shortened link here]`
+
+### Simple webserver
+- Simple `docker` setup using `docker-compose` and `nginx` as a proxy
+- To start: `docker-compose up --build` and navigate to [http://localhost](http://localhost) in browser
+- Example running on a small GCE instance [here](http://35.230.68.216/) - if the IP address has changed, oh well, it's not reserved
